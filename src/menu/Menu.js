@@ -54,7 +54,8 @@ export default class Menu extends Lightning.Component{
 
     _setIndex(idx){
         const value = (idx * 90) + 5
-        this.tag("FocusIndicator").setSmooth('y', value);
+        this.tag("FocusIndicator").setSmooth('y', value)
+        console.log(' this.tag("FocusIndicator")',  this.tag("FocusIndicator"));
         this._index = idx;
     }
 

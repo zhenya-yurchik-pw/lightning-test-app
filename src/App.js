@@ -2,6 +2,7 @@ import {Lightning, Log, Utils} from '@lightningjs/sdk'
 import Splash from "./Splash.js";
 import Main from "./Main.js";
 import Menu from "./menu/Menu";
+import LogoPage from './LogoPage'
 
 export default class App extends Lightning.Component {
     static getFonts() {
@@ -19,6 +20,9 @@ export default class App extends Lightning.Component {
             },
             Menu: {
                 type: Menu, alpha: 0
+            },
+            LogoPage: {
+                type: LogoPage, alpha: 0
             }
         };
     }
@@ -39,7 +43,7 @@ export default class App extends Lightning.Component {
                 }
 
                 loaded() {
-                    this._setState("Main");
+                    this._setState("LogoPage");
                 }
             },
             class Main extends this {
@@ -57,6 +61,23 @@ export default class App extends Lightning.Component {
 
                 _getFocused() {
                     return this.tag("Menu");
+                }
+            },
+            class LogoPage extends this {
+                $enter() {
+                    this.tag("LogoPage").patch({
+                        smooth: {alpha: 1, y: 0}
+                    });
+                }
+
+                $exit() {
+                    this.tag("LogoPage").patch({
+                        smooth: {alpha: 0, y: 100}
+                    });
+                }
+
+                _getFocused() {
+                    return this.tag("LogoPage");
                 }
             }
         ]
